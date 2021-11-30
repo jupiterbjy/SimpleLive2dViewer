@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live2DViewer</title>
+
+    <!-- Load font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+
+    <!-- Copyrighted cubism SDK -->
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+
+    <!-- Load Pixi (dependency for cubism 2/4 integrated loader) -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.6/dist/pixi.min.js"></script>
+
+    <!-- Load cubism 2/4 integrated loader -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+
+    <!-- personal codes -->
+    <script src="console_redirect.js"></script>
+    <script src="live2d_sdk234_loader.js"></script>
+    <script src="main_script.js"></script>
+</head>
+
+<style>
+    @import "style.css";
+</style>
+
+<body>
+<canvas id="live2d_canvas">
+
+</canvas>
+<div class="right_panel">
+    <div id="header">
+    </div>
+    <div class="UrlBox">
+        <input id="InputButton" type="button" value="Load">
+        <label for="InputField"></label><input id="InputField" type="text" placeholder="url to live2d json file...">
+    </div>
+    <div id="console">
+
+    </div>
+</div>
+</body>
+</html>
