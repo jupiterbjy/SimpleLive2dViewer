@@ -16,6 +16,10 @@ To use this, you need to include following sources first.
 */
 
 
+// TODO: Display Animation name, file size and etc if viable
+// TODO: Accept background png, background opacity via URL query
+
+
 window.PIXI = PIXI
 let canvas_div
 let last_source = null
@@ -32,10 +36,12 @@ function load_live2d(json_object_or_url) {
         app.stage.removeChildAt(0)
         console.log("[live2d] Unloaded existing model")
     } catch (error) {
-        console.log("[live2d] No model to unload")
+        // console.log("[live2d] No model to unload")
     }
 
-    let model = PIXI.live2d.Live2DModel.fromSync(json_object_or_url)
+    let model
+
+    model = PIXI.live2d.Live2DModel.fromSync(json_object_or_url)
 
     model.once("load", () => {
         app.stage.addChild(model)
@@ -45,30 +51,21 @@ function load_live2d(json_object_or_url) {
         let scale_w = canvas_div.clientWidth / model.width
 
         // use smaller scale
-        let scale
-        if (scale_h > scale_w) {
-            scale = scale_w
-        } else {
-            scale = scale_h
-        }
+        let scale = Math.min(scale_w, scale_h)
 
         console.log(`[live2d] Canvas w/h: ${canvas_div.clientWidth}/${canvas_div.clientHeight}`)
         console.log(`[live2d] Model w/h: ${model.width}/${model.height}`)
 
         // set scale
         model.scale.set(scale)
-        console.log(`[live2d] Using scale scale ${scale}`)
+        console.log(`[live2d] Scaled to ${scale}`)
 
         // move to center
         let diff_x = Math.floor((canvas_div.clientWidth - model.width) / 2)
         let diff_y = Math.floor((canvas_div.clientHeight - model.height) / 2)
         model.x = diff_x
         model.y = diff_y
-        console.log(`[live2d] Using Offset x: ${diff_x} / y: ${diff_y}`)
-
-        // match canvas to model width
-        // canvas_div.width = model.width
-        // resize_live2d()
+        console.log(`[live2d] Offset to x: ${diff_x} / y: ${diff_y}`)
 
         // Hit callback definition
         model.on("hit", hitAreas => {

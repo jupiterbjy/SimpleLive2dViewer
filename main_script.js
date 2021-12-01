@@ -26,8 +26,12 @@ function viewer_init() {
 // Live2d Loader
 function on_click() {
     let text_value = text_field.value
-    console.log("Loading from " + text_value)
-    load_live2d(text_field.value)
+    if (!text_value) {
+        console.log("URL empty")
+    } else {
+        console.log("Loading from " + text_value)
+        load_live2d(text_field.value)
+    }
 }
 
 
