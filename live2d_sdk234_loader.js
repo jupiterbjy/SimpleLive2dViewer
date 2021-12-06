@@ -22,7 +22,12 @@ To use this, you need to include following sources first.
 
 window.PIXI = PIXI
 let canvas_div
-let last_source = null
+let last_source
+
+// variables for console debugging
+let current_model
+let hit_area_last
+
 
 function load_live2d(json_object_or_url) {
     // Heavily relies on pixi_live2d_display.
@@ -35,13 +40,14 @@ function load_live2d(json_object_or_url) {
     try {
         app.stage.removeChildAt(0)
         console.log("[live2d] Unloaded existing model")
+        // in case there's duplicate
+        app.stage.removeChildAt(0)
     } catch (error) {
         // console.log("[live2d] No model to unload")
     }
 
-    let model
-
-    model = PIXI.live2d.Live2DModel.fromSync(json_object_or_url)
+    let model = PIXI.live2d.Live2DModel.fromSync(json_object_or_url)
+    current_model = model
 
     model.once("load", () => {
         app.stage.addChild(model)
@@ -69,6 +75,7 @@ function load_live2d(json_object_or_url) {
 
         // Hit callback definition
         model.on("hit", hitAreas => {
+            hit_area_last = hitAreas
             if (hitAreas.includes("body")) {
                 console.log("[live2d] Touch on body (SDK2)")
                 model.motion('tap_body')
@@ -82,7 +89,7 @@ function load_live2d(json_object_or_url) {
                 model.expression()
 
             } else {
-                console.log("[live2d] unrecognized area touch\n", hitAreas)
+                console.log(`[live2d] unregistered area touch [${hitAreas[0]}]`)
             }
         })
     })
