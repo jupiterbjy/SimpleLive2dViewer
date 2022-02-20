@@ -17,29 +17,29 @@
     <!-- Load cubism 2/4 integrated loader -->
     <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
 
+    <!-- Load Brython 3.10 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.4/brython.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.4/brython_stdlib.min.js"></script>
+
     <!-- personal codes -->
-    <script src="console_redirect.js"></script>
-    <script src="live2d_sdk234_loader.js"></script>
-    <script src="main_script.js"></script>
+    <script type="text/python" src="main_script.py"></script>
 </head>
 
 <style>
     @import "style.css";
 </style>
 
-<body>
+<body onload="brython(1)">
 <canvas id="live2d_canvas">
 
 </canvas>
-<div class="right_panel">
+<div class="RightPanel">
     <div id="header">
+        Javascript not enabled
     </div>
     <div class="UrlBox">
-        <input id="InputButton" type="button" value="Load">
-        <label for="InputField"></label><input id="InputField" type="text" placeholder="url to live2d json file...">
-    </div>
-    <div id="console">
-
+        <input id="input_btn" type="button" value="Load">
+        <label for="input_field"></label><input id="input_field" type="text" placeholder="url to live2d json file...">
     </div>
 </div>
 </body>

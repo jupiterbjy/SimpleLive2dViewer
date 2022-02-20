@@ -15,8 +15,8 @@ function viewer_init() {
     header.innerHTML = "jupiterbjy's Tiny live2d viewer"
 
     // Keep reference and link button
-    button = document.getElementById("InputButton")
-    text_field = document.getElementById("InputField")
+    button = document.getElementById("input_btn")
+    text_field = document.getElementById("input_field")
 
     button.addEventListener("click", on_click)
 
