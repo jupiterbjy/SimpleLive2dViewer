@@ -12,7 +12,7 @@ let button
 function viewer_init() {
     // Change header
     header = document.getElementById("header")
-    header.innerHTML = "jupiterbjy's Tiny live2d viewer"
+    header.innerHTML = "<a href=\"https://github.com/jupiterbjy/SimpleLive2dViewer\">jupiterbjy's Tiny live2d viewer</a>"
 
     // Keep reference and link button
     button = document.getElementById("InputButton")
@@ -43,10 +43,11 @@ function on_load() {
 
     if (!param) {
         console.log("Loaded")
+        return
     }
 
     // If there is, input this string and trigger load
-    text_field.value = param.substring(1)
+    text_field.value = decodeURIComponent(param.substring(1))
     on_click()
 }
 
