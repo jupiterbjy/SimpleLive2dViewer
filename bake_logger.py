@@ -10,13 +10,34 @@ from logging import Formatter, Handler, getLogger, LogRecord, StreamHandler
 from sys import version, stderr, stdout
 
 # noinspection PyUnresolvedReferences
-from browser import console
+from browser import console, document, html
 
 
 logger = getLogger("l2d_wrapper")
 
 
-# TODO: Add log redirection handler
+def _log_closure(old_func, lvl: str):
+    # probably a tiny bit faster here than on global
+    console_div = document["console"]
+
+    def inner(msg):
+        old_func(msg)
+
+        console_div <= html.P(html.LABEL(msg, Class=lvl), Class="Log")
+        console_div.scrollTo(0, console_div.scrollHeight)
+
+    return inner
+
+
+def console_mirror_init():
+    console.debug = _log_closure(console.debug, "Lvl0")
+    console.info = _log_closure(console.info, "Lvl1")
+    console.warn = _log_closure(console.warn, "Lvl2")
+    console.error = _log_closure(console.error, "Lvl3")
+
+
+# redirect before class table init
+console_mirror_init()
 
 
 class ConsoleHandler(Handler):
