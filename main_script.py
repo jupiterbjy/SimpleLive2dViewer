@@ -9,21 +9,23 @@ Main script, literally.
 
 
 from browser import document, aio, window, bind, html
+from javascript import JSObject
 
 # noinspection PyUnresolvedReferences
-from bake_logger import logger
-from live2d_wrapper import load_live2d, L2DNamespace
+from bake_logger import logger, bake_logger
+from live2d_wrapper import load_live2d, L2DNameSpace
 
 
 @bind(document["input_btn"], "click")
 def on_click(*_):
-    logger.info("called")
 
     text_val = document["input_field"].value
 
-    if not text_val:
-        # nothing to load
-        return
+    if text_val:
+        logger.info(f"Loading {text_val}")
+    else:
+        logger.info(f"No url provided - loading demo file")
+        text_val = r"https://cdn.jsdelivr.net/gh/jupiterbjy/Live2DPractice-Cyannyan/CyanSD/CyanSD.model3.json"
 
     # disable button while processing
     button = document["input_btn"]
@@ -36,34 +38,64 @@ def on_click(*_):
 def on_interaction_check(*_):
     logger.info("called")
 
-    if L2DNamespace.current_model is None:
+    if L2DNameSpace.current_model is None:
         return
 
-    L2DNamespace.current_model.interactive = document["interaction_check"].checked
+    L2DNameSpace.current_model.interactive = document["interaction_check"].checked
 
 
 def list_emotion():
-    model = L2DNamespace.current_model
-    emotions = model.internalModel.motionManager.definitions
-    logger.debug(dir(emotions))
+    logger.info("Checking motion/emotion entries")
 
-    list_div = document["animation_list"]
+    model = L2DNameSpace.current_model
+
+    motions: dict = model.internalModel.motionManager.definitions.to_dict()
+    emotions = [
+        obj.Name
+        for obj in model.internalModel.motionManager.expressionManager.definitions
+    ]
+
+    logger.debug(f"motions: {motions}")
+    logger.debug(f"emotions: {emotions}")
+
+    motion_div = document["motion_list"]
+    emotion_div = document["emotion_list"]
+
+    for entry in motions:
+        assert motion_div <= html.P(
+            html.LABEL(html.INPUT(type="checkbox", id=f"motion_{entry}") + entry),
+            Class="Entry"
+        )
 
     for entry in emotions:
-        assert list_div <= html.LABEL(html.INPUT(type="checkbox", id=f"anim_{entry}") + entry)
+        assert emotion_div <= html.P(
+            html.LABEL(html.INPUT(type="checkbox", id=f"emote_{entry}") + entry),
+            Class="Entry"
+        )
 
 
 def callback_load():
     logger.info("Loading done")
+
+    # remove previously disabled load button
     del document["input_btn"].attrs["disabled"]
 
-    list_emotion()
+    try:
+        list_emotion()
+    except Exception as err:
+        logger.critical(f"{repr(err)}")
 
 
 def on_load():
 
     header = document["header"]
     header.innerHTML = "jupiterbjy's Tiny Live2D viewer"
+
+    # mirror console
+    # window.console_redirect_init()
+
+    # prep logger - need to be done after console redirect script wraps it
+    # bake_logger()
 
     # get param
     # noinspection PyUnresolvedReferences
@@ -73,8 +105,11 @@ def on_load():
         # skip, it's added by JetBrains IDE or there's nothing to load
         return
 
+    # otherwise put param into value and start loading
     document["input_field"].value = param
     on_click()
 
 
 on_load()
+
+# TODO: resize upon size change
