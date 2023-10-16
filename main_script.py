@@ -52,11 +52,19 @@ def list_emotion():
 
     model = L2DNameSpace.current_model
 
-    motions: dict = model.internalModel.motionManager.definitions.to_dict()
-    emotions = [
-        obj.Name
-        for obj in model.internalModel.motionManager.expressionManager.definitions
-    ]
+    motions: dict = list(model.internalModel.motionManager.definitions.to_dict().keys())
+
+    try:
+        emotions = [
+            obj.Name
+            for obj in model.internalModel.motionManager.expressionManager.definitions
+        ]
+    except AttributeError:
+        # probably it's obj.name as that's only difference between Cubism SDK
+        emotions = [
+            obj.name
+            for obj in model.internalModel.motionManager.expressionManager.definitions
+        ]
 
     logger.debug(f"motions: {motions}")
     logger.debug(f"emotions: {emotions}")
