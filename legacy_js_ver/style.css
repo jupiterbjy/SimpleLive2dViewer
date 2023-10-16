@@ -1,0 +1,113 @@
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#live2d_canvas {
+    border: 0.2rem dotted lightcoral;
+    box-sizing: border-box;
+}
+
+.right_panel {
+    background: darkgrey;
+    border: 0.2rem dotted #3C3F41;
+    box-sizing: border-box;
+}
+
+#console {
+    background: #3C3F41;
+}
+
+#header {
+    text-align: center;
+    margin: 0.5em;
+}
+
+@media all and (orientation: landscape){
+    #live2d_canvas {
+        float: left;
+        margin: 1em;
+        width: calc(75% - 1.5em);
+        height: calc(100% - 2em);
+    }
+
+    .right_panel {
+        float: right;
+        margin: 1em 1em 1em 0;
+        width: calc(25% - 1.5em);
+        height: calc(100% - 2em);
+    }
+
+    .UrlBox {
+        margin: 1em 1em 1em 1em;
+        align-content: center;
+    }
+
+    #console {
+        height: calc(100% - 6em);
+        overflow-y: scroll;
+    }
+
+    #header {
+        height: 1em;
+        font-size: 1em;
+    }
+}
+
+
+@media all and (orientation: portrait){
+    #live2d_canvas {
+        margin: 1em;
+        width: calc(100% - 2em);
+        height: calc(75% - 1.5em);
+    }
+
+    .right_panel {
+        margin: 0 1em 1em 1em;
+        width: calc(100% - 2em);
+        height: calc(25% - 1.5em);
+    }
+
+    .UrlBox {
+        height: 2em;
+        margin: 1em 5em 1em 5em;
+        align-content: center;
+    }
+
+    #console {
+        margin: 0.5em 5em 0.5em 5em;
+        height: calc(100% - 9em);
+        overflow-y: scroll;
+    }
+
+    #header {
+        height: 1.5em;
+        font-size: 1.5em;
+    }
+}
+
+#InputField {
+    width: calc(100% - 6em);
+}
+
+#InputButton {
+    width: 5em
+}
+
+p {
+    margin: 0.25em 0.5em 0.25em 0.5em;
+    color: lightgreen;
+    word-break: break-all;
+}
