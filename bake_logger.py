@@ -14,6 +14,7 @@ from browser import console, document, html
 
 
 logger = getLogger("l2d_wrapper")
+__all__ = ["logger"]
 
 
 def _log_closure(old_func, lvl: str):
@@ -29,7 +30,7 @@ def _log_closure(old_func, lvl: str):
     return inner
 
 
-def console_mirror_init():
+def _console_mirror_init():
     console.debug = _log_closure(console.debug, "Lvl0")
     console.info = _log_closure(console.info, "Lvl1")
     console.warn = _log_closure(console.warn, "Lvl2")
@@ -37,7 +38,7 @@ def console_mirror_init():
 
 
 # redirect before class table init
-console_mirror_init()
+_console_mirror_init()
 
 
 class ConsoleHandler(Handler):
@@ -84,7 +85,7 @@ class ConsoleHandler(Handler):
             self.handleError(record)
 
 
-def bake_logger():
+def _bake_logger():
     # define formatter
     formatter = Formatter("[%(levelname)s] %(filename)s:%(lineno)d - %(funcName)s: %(msg)s")
 
@@ -101,4 +102,4 @@ def bake_logger():
     logger.info(version)
 
 
-bake_logger()
+_bake_logger()

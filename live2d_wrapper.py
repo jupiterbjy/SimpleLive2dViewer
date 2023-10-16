@@ -25,10 +25,9 @@ To use this, you need to include following sources first.
 from browser import document, window, timer, bind
 from typing import Mapping, Callable, Any
 import traceback
-import logging
 
+from bake_logger import logger
 
-logger = logging.getLogger("l2d_wrapper")
 
 canvas_div = document["live2d_canvas"]
 
@@ -100,12 +99,18 @@ def model_load_callback(model, callback):
         callback()
 
 
-def resize(model=L2DNameSpace.current_model):
+def resize(model=None):
+
+    if model is None:
+        model = L2DNameSpace.current_model
 
     if not model:
         return
 
     # app.resizeTo = canvas_div
+
+    # reset scale
+    model.scale.set(1.0)
 
     # calculate scale
     scale_h = canvas_div.clientHeight / model.height
@@ -152,12 +157,25 @@ def model_hit_callback_closure(model):
     return model_hit_callback
 
 
-class ResizeTimer:
-    timer = None
+def on_window_resize():
+    app.resizeTo = canvas_div
+    resize()
 
-    @staticmethod
-    @bind(window, "resize")
-    def on_resize(*_):
-        # Gets javascript event object
-        timer.clear_timeout(ResizeTimer.timer)
-        ResizeTimer.timer = timer.set_timeout(resize, 300)
+    logger.debug("Resize timer triggered")
+
+
+class ResizeTimer:
+    active_timer = None
+    refresh_delay = 300
+
+    @classmethod
+    def set_timer(cls):
+        if cls.active_timer is not None:
+            timer.clear_timeout(cls.active_timer)
+
+        cls.active_timer = timer.set_timeout(on_window_resize, cls.refresh_delay)
+
+
+@bind(window, "resize")
+def on_resize(*_):
+    ResizeTimer.set_timer()

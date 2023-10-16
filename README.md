@@ -1,8 +1,7 @@
 # Simple Live2d Viewer
 
-![image](https://github.com/jupiterbjy/SimpleLive2dViewer/assets/26041217/895c261d-ee1b-446a-a25f-c649590706fa)
-
-![image](https://github.com/jupiterbjy/SimpleLive2dViewer/assets/26041217/2c34d3b0-7783-435a-8306-35310ee74bb9)
+![Screenshot_190](https://github.com/jupiterbjy/SimpleLive2dViewer/assets/26041217/79cf1946-b419-4015-839c-043153d85cff)
+![Screenshot_191](https://github.com/jupiterbjy/SimpleLive2dViewer/assets/26041217/cb13a8b0-c7d4-454e-bbff-3c6ee9e7cb5c)
 
 Simple Web based Live2d viewer using [pixijs](https://github.com/pixijs/pixijs) and [pixi-live2d-display](https://github.com/guansss/pixi-live2d-display), therefore naturally supporting all SDK 2/3/4.
 
