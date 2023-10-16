@@ -43,7 +43,7 @@ app = pixi.Application.new({
 app.resizeTo = canvas_div
 
 
-class L2DNamespace:
+class L2DNameSpace:
     """
     Namespace for debugging
     """
@@ -53,25 +53,29 @@ class L2DNamespace:
     last_hit_areas = None
 
 
-window.L2DNameSpace = L2DNamespace
+window.L2DNameSpace = L2DNameSpace
 
 
 def load_live2d(json_or_url: Mapping | str, callback: Callable):
+    if not json_or_url:
+        raise ValueError("No url is provided")
 
-    L2DNamespace.last_source = json_or_url
+    logger.debug(f"Loading {json_or_url}")
+
+    L2DNameSpace.last_source = json_or_url
 
     # try to remove previous model, if any
     # Can't rely on try-except here, it still propagates error message.
-    try:
-        if L2DNamespace.current_model:
+    if L2DNameSpace.current_model is not None:
+        try:
             app.stage.removeChildAt(0)
-            L2DNamespace.current_model = None
+            L2DNameSpace.current_model = None
 
-    except Exception:
-        pass
+        except Exception as err:
+            logger.critical(err)
 
-    else:
-        logger.info("Unloaded previous model")
+        else:
+            logger.info("Unloaded previous model")
 
     logger.info("Loading new model")
 
@@ -81,18 +85,22 @@ def load_live2d(json_or_url: Mapping | str, callback: Callable):
 
 
 def model_load_callback(model, callback):
-    L2DNamespace.current_model = model
+
+    logger.debug("in callback")
+
+    L2DNameSpace.current_model = model
 
     try:
         app.stage.addChild(model)
         model.on("hit", model_hit_callback_closure(model))
         resize(model)
+
     finally:
         # Could pass param to callback for success/fail check I guess?
         callback()
 
 
-def resize(model=L2DNamespace.current_model):
+def resize(model=L2DNameSpace.current_model):
 
     if not model:
         return
@@ -122,9 +130,9 @@ def resize(model=L2DNamespace.current_model):
 
 def model_hit_callback_closure(model):
     def model_hit_callback(hit_areas):
-        L2DNamespace.last_hit_areas = hit_areas
+        L2DNameSpace.last_hit_areas = hit_areas
 
-        logger.debug(f"Touch on {hit_areas}")
+        logger.info(f"Touch on {hit_areas}")
 
         for hit_area in hit_areas:
             match hit_area:
@@ -139,7 +147,7 @@ def model_hit_callback_closure(model):
                     model.expression()
                 case _:
                     # unknown area
-                    pass
+                    logger.debug(f"Unregistered hit area {hit_area}, ignoring")
 
     return model_hit_callback
 
