@@ -19,7 +19,7 @@ http://jupiterbjy.github.io/SimpleLive2dViewer/?https://cdn.jsdelivr.net/gh/guan
 
 - [Example 1][1] - URL from pixi-live2d-display, Cubism's official model
 
-- [Example 2][2] - Self made Live2D
+- [Example 2][2] - Self made [Live2D fanart](https://github.com/jupiterbjy/Live2DPractice-Cyannyan) of Vtuber Cyannyan
 
 
 [1]: https://jupiterbjy.github.io/SimpleLive2dViewer/?https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json
