@@ -12,14 +12,16 @@
     <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
 
     <!-- Load Pixi (dependency for cubism 2/4 integrated loader) -->
-    <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.6/dist/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js"></script>
 
     <!-- Load cubism 2/4 integrated loader -->
     <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
 
-    <!-- Load Brython 3.10 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.4/brython.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.4/brython_stdlib.min.js"></script>
+    <!-- Load Brython 3.11 - 3.12.0 is failing with 'emit open brackets' for now -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.11.2/brython.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.11.2/brython_stdlib.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.12.0/brython.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.12.0/brython_stdlib.min.js"></script>-->
 
     <!-- personal codes -->
     <script type="text/python" src="main_script.py"></script>
@@ -39,10 +41,13 @@
     </div>
     <div class="UrlBox">
         <input id="input_btn" type="button" value="Load">
-        <label for="input_field"></label><input id="input_field" type="text" placeholder="url to live2d json file...">
+        <label for="input_field"></label><input id="input_field" type="text" placeholder="url to json file...">
     </div>
     <label><input type="checkbox" id="interaction_check" checked>Interaction</label>
-    <div id="animation_list">
+    <div id="motion_list">
+
+    </div>
+    <div id="emotion_list">
 
     </div>
 </div>
