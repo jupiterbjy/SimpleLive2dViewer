@@ -20,20 +20,69 @@ body {
     box-sizing: border-box;
 }
 
-.right_panel {
+.RightPanel {
     background: darkgrey;
     border: 0.2rem dotted #3C3F41;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.GroupHeader {
+    margin-bottom: 0.1rem;
+}
+
+.GroupPanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.List {
+    background: #FFFFFF;
+    min-height: 1rem;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.Entry {
+    margin: 0;
+}
+
+#input_field {
+    /*width: calc(100% - 6em);*/
+    display: flex;
+    flex: 1;
+}
+
+#input_btn {
+    width: 5em
 }
 
 #console {
     background: #3C3F41;
+    overflow-y: scroll;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 #header {
     text-align: center;
-    margin: 0.5em;
 }
+
+#vert_hor_switcher {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    /* preventing it going negative - https://css-tricks.com/flexbox-truncated-text/ */
+}
+
+.UrlBox {
+    display: flex;
+    flex-direction: row;
+}
+
 
 @media all and (orientation: landscape){
     #live2d_canvas {
@@ -43,26 +92,25 @@ body {
         height: calc(100% - 2em);
     }
 
-    .right_panel {
+    .RightPanel {
         float: right;
         margin: 1em 1em 1em 0;
         width: calc(25% - 1.5em);
         height: calc(100% - 2em);
     }
 
-    .UrlBox {
-        margin: 1em 1em 1em 1em;
-        align-content: center;
-    }
-
-    #console {
-        height: calc(100% - 6em);
-        overflow-y: scroll;
+    .GroupPanel {
+        margin: 1rem;
+        max-height: 10rem;
     }
 
     #header {
-        height: 1em;
+        margin-bottom: 0.5rem;
         font-size: 1em;
+    }
+
+    #vert_hor_switcher {
+        flex-direction: column;
     }
 }
 
@@ -74,40 +122,51 @@ body {
         height: calc(75% - 1.5em);
     }
 
-    .right_panel {
+    .RightPanel {
         margin: 0 1em 1em 1em;
         width: calc(100% - 2em);
         height: calc(25% - 1.5em);
     }
 
-    .UrlBox {
-        height: 2em;
-        margin: 1em 5em 1em 5em;
-        align-content: center;
+    .GroupPanel {
+        margin: 0.5rem;
+        /*max-height: 5rem;*/
     }
 
     #console {
-        margin: 0.5em 5em 0.5em 5em;
-        height: calc(100% - 9em);
-        overflow-y: scroll;
+        margin-top: 0.5rem;
     }
 
     #header {
-        height: 1.5em;
-        font-size: 1.5em;
+        font-size: 1.2em;
+    }
+
+    #vert_hor_switcher {
+        flex-direction: row;
+    }
+
+    .List {
+        flex: 1;
     }
 }
 
-#InputField {
-    width: calc(100% - 6em);
-}
-
-#InputButton {
-    width: 5em
-}
-
-p {
+.Log {
     margin: 0.25em 0.5em 0.25em 0.5em;
-    color: lightgreen;
     word-break: break-all;
+}
+
+.Lvl0 {
+    color: lightskyblue;
+}
+
+.Lvl1 {
+    color: lightgreen;
+}
+
+.Lvl2 {
+    color: yellow;
+}
+
+.Lvl3 {
+    color: red;
 }
