@@ -34,12 +34,17 @@ canvas_div = document["live2d_canvas"]
 # noinspection PyUnresolvedReferences
 pixi = window.PIXI
 
+# before startup set pixi DPI - assuming this isn't zoomed-in start scenario
+# https://stackoverflow.com/a/66864375/10909029
+pixi.settings.RESOLUTION = window.devicePixelRatio
+
 app = pixi.Application.new({
     "view": canvas_div,
     "transparent": True,
     "autoStart": True,
+    "resizeTo": canvas_div
+    # "autoDensity": True,
 })
-app.resizeTo = canvas_div
 
 
 class L2DNameSpace:
@@ -50,6 +55,7 @@ class L2DNameSpace:
     last_source = None
     current_model = None
     last_hit_areas = None
+    canvas_div = None
 
 
 window.L2DNameSpace = L2DNameSpace
@@ -100,7 +106,6 @@ def model_load_callback(model, callback):
 
 
 def resize(model=None):
-
     if model is None:
         model = L2DNameSpace.current_model
 
@@ -158,10 +163,10 @@ def model_hit_callback_closure(model):
 
 
 def on_window_resize():
+    logger.debug("Pixi Resize triggered")
+
     app.resizeTo = canvas_div
     resize()
-
-    logger.debug("Resize timer triggered")
 
 
 class ResizeTimer:
