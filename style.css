@@ -63,7 +63,7 @@ body {
 }
 
 #input_btn {
-    width: 5em
+    width: 5rem
 }
 
 #console {
@@ -94,16 +94,16 @@ body {
 @media all and (orientation: landscape){
     #live2d_canvas {
         float: left;
-        margin: 1em;
-        width: calc(75% - 1.5em);
-        height: calc(100% - 2em);
+        margin: 1rem;
+        width: calc(75% - 1.5rem);
+        height: calc(100% - 2rem);
     }
 
     .RightPanel {
         float: right;
-        margin: 1em 1em 1em 0;
-        width: calc(25% - 1.5em);
-        height: calc(100% - 2em);
+        margin: 1rem 1rem 1rem 0;
+        width: calc(25% - 1.5rem);
+        height: calc(100% - 2rem);
     }
 
     .GroupPanel {
@@ -113,7 +113,7 @@ body {
 
     #header {
         margin-bottom: 0.5rem;
-        font-size: 1em;
+        font-size: 1rem;
     }
 
     #vert_hor_switcher {
@@ -124,15 +124,17 @@ body {
 
 @media all and (orientation: portrait){
     #live2d_canvas {
-        margin: 1em;
-        width: calc(100% - 2em);
-        height: calc(75% - 1.5em);
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        height: calc(75% - 1.5rem);
+        max-height: calc(100% - 13.5rem);
     }
 
     .RightPanel {
-        margin: 0 1em 1em 1em;
-        width: calc(100% - 2em);
-        height: calc(25% - 1.5em);
+        margin: 0 1rem 1rem 1rem;
+        width: calc(100% - 2rem);
+        height: calc(25% - 1.5rem);
+        min-height: 10rem;
     }
 
     .GroupPanel {
@@ -145,7 +147,7 @@ body {
     }
 
     #header {
-        font-size: 1.2em;
+        font-size: 1.2rem;
     }
 
     #vert_hor_switcher {
@@ -158,7 +160,7 @@ body {
 }
 
 .Log {
-    margin: 0.25em 0.5em 0.25em 0.5em;
+    margin: 0.1rem 0.2rem 0.1rem 0.2rem;
     word-break: break-all;
 }
 
