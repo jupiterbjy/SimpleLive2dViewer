@@ -27,7 +27,7 @@ def on_click(*_):
     else:
         # if not set it to default url
         logger.info(f"No url provided - loading demo file")
-        text_val = r"https://cdn.jsdelivr.net/gh/jupiterbjy/Live2DPractice-Cyannyan/CyanSD/CyanSD.model3.json"
+        text_val = r"https://cdn.jsdelivr.net/gh/jupiterbjy/Live2DPractice-Cyannyan/CyanSDLowRes/CyanSD.model3.json"
         document["input_field"].value = text_val
 
     # disable button while processing
