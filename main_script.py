@@ -52,8 +52,10 @@ def list_emotion():
 
     model = L2DNameSpace.current_model
 
+    # motion is dictionary with (motion name: motion info dict)
     motions: dict = list(model.internalModel.motionManager.definitions.to_dict().keys())
 
+    # emotions could be using .Name on sdk3+, .name on sdk2, so both case exists
     try:
         emotions = [
             obj.Name
@@ -69,9 +71,17 @@ def list_emotion():
     logger.debug(f"motions: {motions}")
     logger.debug(f"emotions: {emotions}")
 
+    # fetch div info
     motion_div = document["motion_list"]
     emotion_div = document["emotion_list"]
 
+    # first clear it's child, as there could've been a previous model
+    motion_div.replaceChildren()
+    emotion_div.replaceChildren()
+
+    # TODO: add option to trigger each motion/emotion upon click
+
+    # start filling in motions & emotions
     for entry in motions:
         assert motion_div <= html.P(
             html.LABEL(html.INPUT(type="checkbox", id=f"motion_{entry}") + entry),
