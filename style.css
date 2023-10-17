@@ -6,15 +6,18 @@ html {
     box-sizing: border-box;
     height: 100%;
     margin: 0;
+    position: fixed;
     top: 0;
     bottom: 0;
-    position: fixed;
+    overflow: hidden;
 }
 
 body {
     box-sizing: border-box;
     height: 100%;
     margin: 0;
+    top: 0;
+    bottom: 0;
     overflow: hidden;
 }
 
