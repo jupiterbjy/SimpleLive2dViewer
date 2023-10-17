@@ -102,8 +102,8 @@ def on_load():
     header = document["header"]
     header.innerHTML = "jupiterbjy's Tiny Live2D viewer"
 
-    # mirror console
-    # window.console_redirect_init()
+    # mirror console on js side too
+    window.console_redirect_init()
 
     # prep logger - need to be done after console redirect script wraps it
     # bake_logger()
