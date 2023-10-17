@@ -97,6 +97,7 @@ body {
         margin: 1rem;
         width: calc(75% - 1.5rem);
         height: calc(100% - 2rem);
+        max-width: calc(100% - 23rem);
     }
 
     .RightPanel {
@@ -104,6 +105,7 @@ body {
         margin: 1rem 1rem 1rem 0;
         width: calc(25% - 1.5rem);
         height: calc(100% - 2rem);
+        min-width: 20rem;
     }
 
     .GroupPanel {
